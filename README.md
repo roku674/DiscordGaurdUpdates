@@ -1,7 +1,7 @@
 # Discord Gaurd Updates
 I made this project mostly for our guild in a game we play called Starport Galactic Empires
 
-You should be able to run the gitClone.bat to clone the extensions
+Once built make sure your you create a JSON folder and put your settings in the folder
 
 <h2>
   Extensions:
