@@ -4,8 +4,9 @@ namespace DiscordGaurdUpdates
 {
     internal class Settings
     {
-        public string discordToken;
         public uint botErrorsId;
+        public string chatLogsDir;
+        public string discordToken;
         public uint enemySightingsId;
         public uint voiceSlaversOnlyId;
 
@@ -13,10 +14,11 @@ namespace DiscordGaurdUpdates
         {
         }
 
-        public Settings(string discordToken, uint botErrorsId, uint enemySightingsId, uint voiceSlaversOnlyId)
+        public Settings(uint botErrorsId, string chatLogsDir, string discordToken, uint enemySightingsId, uint voiceSlaversOnlyId)
         {
-            this.discordToken = discordToken ?? throw new ArgumentNullException(nameof(discordToken));
             this.botErrorsId = botErrorsId;
+            this.chatLogsDir = chatLogsDir ?? throw new ArgumentNullException(nameof(chatLogsDir));
+            this.discordToken = discordToken ?? throw new ArgumentNullException(nameof(discordToken));
             this.enemySightingsId = enemySightingsId;
             this.voiceSlaversOnlyId = voiceSlaversOnlyId;
         }

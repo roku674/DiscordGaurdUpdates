@@ -94,31 +94,22 @@ namespace DiscordGaurdUpdates
         {
             bool chatLogsFound = false;
 
-            string directory = Directory.GetCurrentDirectory();
-            DirectoryInfo parentDirectoryInfo = Directory.GetParent(directory);
-            parentDirectoryInfo = Directory.GetParent(parentDirectoryInfo.FullName);
+            FileSystemWatcher watcher = new FileSystemWatcher();
+            watcher.Path = settings.chatLogsDir;
 
-            //System.Console.WriteLine(parentDirectoryInfo.Name);
-
-            if (parentDirectoryInfo.Exists)
+            if (!watcher.Path.Equals(" ") && !string.IsNullOrEmpty(watcher.Path))
             {
-                FileSystemWatcher watcher = new FileSystemWatcher();
-                watcher.Path = parentDirectoryInfo.FullName;
+                watcher.NotifyFilter = NotifyFilters.LastAccess | NotifyFilters.LastWrite
+                                     | NotifyFilters.FileName | NotifyFilters.DirectoryName;
+                watcher.Filter = "*.*";
 
-                if (!watcher.Path.Equals(" ") && !string.IsNullOrEmpty(watcher.Path))
-                {
-                    watcher.NotifyFilter = NotifyFilters.LastAccess | NotifyFilters.LastWrite
-                                         | NotifyFilters.FileName | NotifyFilters.DirectoryName;
-                    watcher.Filter = "*.*";
+                watcher.Changed += new FileSystemEventHandler(OnChatChangedAsync);
 
-                    watcher.Changed += new FileSystemEventHandler(OnChatChangedAsync);
+                watcher.EnableRaisingEvents = true;
 
-                    watcher.EnableRaisingEvents = true;
+                System.Console.WriteLine("Sucessfully ran " + settings.chatLogsDir + " Listener!");
 
-                    System.Console.WriteLine("Sucessfully ran " + parentDirectoryInfo.Name + " Listener!");
-
-                    await Task.Delay(System.Threading.Timeout.Infinite);
-                }
+                await Task.Delay(System.Threading.Timeout.Infinite);
             }
 
             if (!chatLogsFound)
