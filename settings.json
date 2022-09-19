@@ -1,6 +1,7 @@
 ﻿{
   "botErrorsId": 0,
-  "discordToken": "",
+  "chatLogsDir": null,
+  "discordToken": null,
   "enemySightingsId": 0,
   "voiceSlaversOnlyId": 0
 }
